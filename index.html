@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inward App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <img src="image.png" alt="Logo" class="logo" /> 
+
+  <!-- Login Page -->
+  <div id="loginPage" class="page">
+    <h2>Welcome</h2>
+    <input id="loginEmail" type="email" placeholder="Email" required />
+    <input id="loginPassword" type="password" placeholder="Password" required />
+    <button onclick="login()">Login</button>
+    <p>
+      New User?
+      <a href="#" onclick="showPage('registerPage'); return false;">Register Here</a>
+    </p>
+  </div>
+
+  <!-- Register Page -->
+  <div id="registerPage" class="page hidden">
+    <h2>Register</h2>
+    <input id="regName" type="text" placeholder="Name" required />
+    <input id="regEmail" type="email" placeholder="Email" required />
+    <input id="regMobile" type="tel" placeholder="Mobile" required />
+    <input id="regPassword" type="password" placeholder="Password" required />
+    <button onclick="register()">Register</button>
+    <p>
+      Already have an account?
+      <a href="#" onclick="showPage('loginPage'); return false;">Login Here</a>
+    </p>
+  </div>
+
+  <!-- Dashboard Page -->
+  <div id="dashboardPage" class="page hidden">
+    <h2>Dashboard</h2>
+    <button onclick="showPage('inwardListPage'); loadInwards()">Inward</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Inward List Page -->
+  <div id="inwardListPage" class="page page-large hidden">
+    <h2>Inward List</h2>
+
+    <div class="clickable-box" onclick="showNewInwardForm()">
+      New Inward
+      <span class="arrow">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 12H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          <path d="M12 6L18 12L12 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+
+    <table id="inwardTable">
+      <thead>
+        <tr>
+          <th>GateIn Num</th>
+          <th>Supplier Name</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button onclick="showPage('dashboardPage')">Back</button>
+  </div>
+
+  <!-- New Inward Page -->
+  <div id="newInwardPage" class="page page-larger hidden">
+    <h2>New Inward</h2>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>GateIn No</label>
+        <input id="gateinNumber" readonly />
+      </div>
+      <div class="form-group">
+        <label>Entry Date</label>
+        <input id="entryDate" readonly />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Supplier Name</label>
+        <input id="supplierName" />
+      </div>
+      <div class="form-group">
+        <label>Supplier Code</label>
+        <input id="supplierCode" />
+      </div>
+      <div class="form-group">
+        <label>Purchase Order No</label>
+        <input id="purchaseOrder" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>PO Type</label>
+        <input id="poType" />
+      </div>
+      <div class="form-group">
+        <label>Invoice No</label>
+        <input id="invoiceNumber" />
+      </div>
+      <div class="form-group">
+        <label>Invoice Date</label>
+        <input id="invoiceDate" type="date" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Vehicle Number</label>
+        <input id="vehicleNumber" />
+      </div>
+      <div class="form-group">
+        <label>Vehicle In Time</label>
+        <input id="vehicleTime" type="time" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Entered By</label>
+        <input id="enteredBy" />
+      </div>
+      <div class="form-group">
+        <label>Remarks</label>
+        <input id="remarks" />
+      </div>
+    </div>
+
+    <input type="hidden" id="editId" />
+
+    <button onclick="saveInwardOrUpdateInwards()">Save</button>
+    <button onclick="showPage('inwardListPage')">Back</button>
+  </div>
+
+  <!-- View Inward Page -->
+  <div id="viewInwardPage" class="page hidden">
+    <h2>View Inward</h2>
+    <ul id="inwardDetails"></ul>
+    <a id="pdfDownload" target="_blank" href="#">Download PDF</a>
+    <button onclick="showPage('inwardListPage')">Back</button>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</body>
+</html>

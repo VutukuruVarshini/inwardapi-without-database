@@ -1,0 +1,258 @@
+.logo { 
+  position: absolute; /* stays at the top-left */
+  top: 20px;
+  left: 20px;
+  height: 40px;
+  width: auto;
+  z-index: 1000;
+}
+
+/* Body should not center everything with flex (that caused overlapping) */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgb(223, 238, 241));
+  padding-top: 80px;   /* ✅ push everything down below logo */
+  box-sizing: border-box;
+}
+
+/* Small page (login etc.) */
+.page {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+/* Medium page */
+.page-large {
+  background: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  width: 85%;
+  max-width: 1000px;
+  min-height: 40vh;
+  margin: 20px auto;  /* ✅ replaces 130% margin */
+}
+
+/* Large inward form page */
+.page-larger {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  width: 85%;
+  max-width: 1000px;
+  min-height: 60vh;
+  margin: 30px auto;  /* ✅ replaces 165% margin */
+}
+
+/* Buttons inside the form */
+.page-larger button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;  /* consistent rounded corners */
+  padding: 8px 16px;
+  margin-right: 10px;   /* space between buttons */
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+   display: inline-block;
+}
+
+.page-larger button:hover {
+  background: #0056b3;
+}
+
+.hidden {
+  display: none;
+}
+input, button {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 25px;
+}
+
+button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px; /* curve edges */
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.table-header {
+  display: flex;
+  justify-content: flex-end; /* aligns button to the right */
+  margin-bottom: 15px;       /* spacing between button and table */
+}
+
+.clickable-box {
+  background: rgb(149, 204, 245);
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 25px;
+  color: #666666; /* colour */
+  display: inline-block;
+}
+
+.arrow svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+element.style {
+    width: 870px;
+    height: 30px;
+}
+
+
+/* Table styling */
+/* Container for the table to add vertical scrolling */
+.table-container {
+  max-height: 300px;  /* Set your desired max height */
+  overflow-y: auto;   /* Vertical scroll */
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+
+
+/* Table styles */
+#inwardTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 3px;                    /* vertical spacing between rows */
+  font-size: 1rem;
+  table-layout: fixed; /* fixed widths for columns */
+  border: none;
+}
+/* Table header */
+#inwardTable thead tr {
+  background-color: #f0f0f0;
+}
+#inwardTable th {
+  padding: 10px;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  border: none;
+  box-sizing: border-box;
+}
+/* Table body rows */
+#inwardTable tbody tr {
+  background-color: #f7f9fc;
+  border-radius: 8px;
+  
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+    width: 700px;
+    height: 20px;
+}
+
+#inwardTable tbody tr:hover {
+  background-color: #90d1ff63;
+}
+
+/* Table data cells */
+#inwardTable td {
+  padding: 2px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: none;
+  box-sizing: border-box;
+}
+
+#inwardTable td.actions {
+  text-align: right; /* aligns all content in that cell to the right */
+  padding-right: 20px; /* optional: add some right padding */
+}
+
+#inwardTable td.actions button {
+  margin-left: 10px; /* moves the button 15px away from the left content */
+}
+/* Fixed column widths */
+#inwardTable th:nth-child(1),
+#inwardTable td:nth-child(1) {
+  width: 100px;
+}
+
+#inwardTable th:nth-child(2),
+#inwardTable td:nth-child(2) {
+  width: 100px;
+}
+
+#inwardTable th:nth-child(3),
+#inwardTable td:nth-child(3) {
+  width: 100px;
+}
+
+#inwardTable th:nth-child(4),
+#inwardTable td:nth-child(4) {
+  width: 100px;
+  text-align: left;
+}
+
+#inwardTable,
+#inwardTable th,
+#inwardTable td {
+  border: none !important;
+}
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1; /* each input takes equal width */
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1; /* each input takes equal width */
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+} 
