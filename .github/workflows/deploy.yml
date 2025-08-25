@@ -1,5 +1,4 @@
-
-        name: Deploy to BTP
+name: Deploy to BTP
 
 on:
   push:
@@ -11,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Cloud Foundry CLI
         uses: cloudfoundry/cf-action@v1
@@ -19,11 +19,10 @@ jobs:
       - name: Login to BTP
         run: |
           cf login -a https://api.cf.us10-001.hana.ondemand.com \
-          -u ${{ secrets.BTP_USER }} \
-          -p ${{ secrets.BTP_PASSWORD }} \
-          -o 1e77eb3ftrial \
-          -s dev
+            -u ${{ secrets.BTP_USER }} \
+            -p ${{ secrets.BTP_PASSWORD }} \
+            -o 1e77eb3ftrial \
+            -s dev
 
       - name: Push App
         run: cf push inward-app -b staticfile_buildpack -m 64M -p .
-
