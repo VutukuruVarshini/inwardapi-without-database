@@ -4,27 +4,34 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:  # allows manual run from GitHub
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout your code from GitHub
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Cloud Foundry CLI
-        uses: cloudfoundry/cf-cli-action@v2
+      # 2️⃣ Install Cloud Foundry CLI
+      - name: Install Cloud Foundry CLI
+        run: |
+          curl -LO "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github" -o cf-cli.tgz
+          tar -xvzf cf-cli.tgz
+          sudo mv cf /usr/local/bin/cf
+          cf --version
 
+      # 3️⃣ Log in to your BTP space using secrets
       - name: Login to BTP
         run: |
           cf login -a https://api.cf.us10-001.hana.ondemand.com \
             -u ${{ secrets.BTP_USER }} \
             -p ${{ secrets.BTP_PASSWORD }} \
-            -o 1e77eb3ftrial \
-            -s dev
+            -o ${{ secrets.BTP_ORG }} \
+            -s ${{ secrets.BTP_SPACE }}
 
+      # 4️⃣ Push your app
       - name: Push App
         run: cf push inward-app -b staticfile_buildpack -m 64M -p .
-
