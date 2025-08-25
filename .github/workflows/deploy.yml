@@ -1,0 +1,27 @@
+name: Deploy to BTP
+
+on:
+  push:
+    branches:
+      - main  # Change if your default branch is different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install CF CLI
+        run: sudo apt-get update && sudo apt-get install -y cf-cli
+
+      - name: Login to BTP
+        run: |
+          cf login -a https://api.cf.us10-001.hana.ondemand.com \
+          -u ${{ secrets.BTP_USER }} \
+          -p ${{ secrets.BTP_PASSWORD }} \
+          -o 1e77eb3ftrial \
+          -s dev
+
+      - name: Push App
+        run: cf push inward-app -b staticfile_buildpack -m 64M -p .
