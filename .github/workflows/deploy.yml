@@ -1,9 +1,10 @@
-name: Deploy to BTP
+
+        name: Deploy to BTP
 
 on:
   push:
     branches:
-      - main  # Change if your default branch is different
+      - main
 
 jobs:
   deploy:
@@ -12,8 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install CF CLI
-        run: sudo apt-get update && sudo apt-get install -y cf-cli
+      - name: Set up Cloud Foundry CLI
+        uses: cloudfoundry/cf-action@v1
 
       - name: Login to BTP
         run: |
@@ -25,3 +26,4 @@ jobs:
 
       - name: Push App
         run: cf push inward-app -b staticfile_buildpack -m 64M -p .
+
